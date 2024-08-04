@@ -1,6 +1,6 @@
 // =======Options START=======
 var authConfig = {
-  siteName: "GoIndex-theme-r", // 网站名称
+  siteName: "GoIndex-theme-acrou", // 网站名称
   version: "1.1.2", // 程序版本
   theme: "acrou",
   // 强烈推荐使用自己的 client_id 和 client_secret
@@ -55,7 +55,7 @@ var authConfig = {
    */
   search_result_list_page_size: 50,
   // 确认有 cors 用途的可以开启
-  enable_cors_file_down: true,
+  enable_cors_file_down: false,
   /**
    * 上面的 basic auth 已经包含了盘内全局保护的功能。所以默认不再去认证 .password 文件内的密码;
    * 如果在全局认证的基础上，仍需要给某些目录单独进行 .password 文件内的密码验证的话，将此选项设置为 true;
@@ -65,7 +65,9 @@ var authConfig = {
 };
 
 var themeOptions = {
-  cdn: "https://git.randallanjie.com/Randall/goindex-theme-r/raw/branch/master",
+  cdn: "https://cdn.jsdelivr.net/gh/RandallAnjie/goindex-theme-r",
+  // 主题版本号
+  version: "v2.0.9",
   //可选默认系统语言:en/zh-chs/zh-cht
   languages: "zh-chs",
   render: {
@@ -142,6 +144,9 @@ const CONSTS = new (class {
 var gds = [];
 
 function html(current_drive_order = 0, model = {}) {
+  if (themeOptions.version && themeOptions.version !== '') {
+    themeOptions.version = '@' + themeOptions.version;
+  }
   return `
 <!DOCTYPE html>
 <html>
@@ -150,7 +155,7 @@ function html(current_drive_order = 0, model = {}) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
   <title>${authConfig.siteName}</title>
   <style>
-    @import url(${themeOptions.cdn}/dist/style.css);
+    @import url(${themeOptions.cdn}${themeOptions.version}/dist/style.css);
   </style>
   <script>
     window.gdconfig = JSON.parse('${JSON.stringify({
@@ -167,7 +172,9 @@ function html(current_drive_order = 0, model = {}) {
 </head>
 <body>
     <div id="app"></div>
-    <script src="${themeOptions.cdn}/dist/app.js"></script>
+    <script src="${themeOptions.cdn}${
+    themeOptions.version
+  }/dist/app.js"></script>
 </body>
 </html>
 `;
