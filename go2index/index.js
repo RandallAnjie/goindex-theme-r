@@ -1,6 +1,6 @@
 // =======Options START=======
 var authConfig = {
-  siteName: "GoIndex-theme-acrou", // 网站名称
+  siteName: "GoIndex-theme-r", // 网站名称
   version: "1.1.2", // 程序版本
   theme: "acrou",
   // 强烈推荐使用自己的 client_id 和 client_secret
@@ -55,7 +55,7 @@ var authConfig = {
    */
   search_result_list_page_size: 50,
   // 确认有 cors 用途的可以开启
-  enable_cors_file_down: false,
+  enable_cors_file_down: true,
   /**
    * 上面的 basic auth 已经包含了盘内全局保护的功能。所以默认不再去认证 .password 文件内的密码;
    * 如果在全局认证的基础上，仍需要给某些目录单独进行 .password 文件内的密码验证的话，将此选项设置为 true;
@@ -65,27 +65,25 @@ var authConfig = {
 };
 
 var themeOptions = {
-  cdn: "https://cdn.jsdelivr.net/gh/Aicirou/goindex-theme-acrou",
-  // 主题版本号
-  version: "2.0.8",
+  cdn: "https://git.randallanjie.com/Randall/goindex-theme-r/raw/branch/master",
   //可选默认系统语言:en/zh-chs/zh-cht
-  languages: "en",
+  languages: "zh-chs",
   render: {
     /**
      * 是否渲染HEAD.md文件
      * Render HEAD.md file
      */
-    head_md: false,
+    head_md: true,
     /**
      * 是否渲染README.md文件
      * Render README.md file
      */
-    readme_md: false,
+    readme_md: true,
     /**
      * 是否渲染文件/文件夹描述
      * Render file/folder description or not
      */
-    desc: false,
+    desc: true,
   },
   /**
    * 视频播放器选项
@@ -152,7 +150,7 @@ function html(current_drive_order = 0, model = {}) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
   <title>${authConfig.siteName}</title>
   <style>
-    @import url(${themeOptions.cdn}@${themeOptions.version}/dist/style.min.css);
+    @import url(${themeOptions.cdn}/dist/style.css);
   </style>
   <script>
     window.gdconfig = JSON.parse('${JSON.stringify({
@@ -169,9 +167,7 @@ function html(current_drive_order = 0, model = {}) {
 </head>
 <body>
     <div id="app"></div>
-    <script src="${themeOptions.cdn}@${
-    themeOptions.version
-  }/dist/app.min.js"></script>
+    <script src="${themeOptions.cdn}/dist/app.js"></script>
 </body>
 </html>
 `;
